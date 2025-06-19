@@ -11,4 +11,5 @@ class Camera:
         pass
 
     def world_to_screen(self, pos: list[float]):
-        pass
+        screen_pos = [pos[0] + self.center[0] + self.pos[0], pos[1] + self.center[1] + self.pos[1]]
+        return screen_pos

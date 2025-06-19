@@ -1,26 +1,25 @@
 import pyglet
 from pyglet.gl import glClearColor
 
+import resources
 import resources as res
-import graphics
+import ship
 import camera
 
 # Create a window
-window = pyglet.window.Window(width=1600, height=900, caption="Basic Pyglet Game Loop")
+window = pyglet.window.Window(width=2000, height=1100, caption="Basic Pyglet Game Loop")
 
 #   set colour after clear call
 glClearColor(100/255.0, 100/255.0, 230/255.0, 1.0)
-
 batch = pyglet.graphics.Batch()
-
 camera = camera.Camera()
 
-ship_GameSprite = graphics.GameSprite("ship.png", batch, camera)
-ship_GameSprite.sprite.batch = batch
+ship01 = ship.Ship([0, 0], resources.sprite_ship)
+ship01.sprite.batch = batch
 
 # Update function (called every frame or interval)
 def update(dt):
-    pass
+    ship01.update(camera)
 
 @window.event
 def on_draw():
