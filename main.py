@@ -37,7 +37,7 @@ def on_key_release(symbol, modifiers):
 
 @window.event
 def on_mouse_press(x, y, button, modifiers):
-    pass  # Handle mouse press events here
+    ship01.world_dest = [x - camera.center[0], y - camera.center[1]]
 
 @window.event
 def on_mouse_scroll(x, y, scroll_x, scroll_y):
