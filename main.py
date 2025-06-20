@@ -22,7 +22,7 @@ ship02 = ship.Ship([100, 100], resources.image_ship, resources.sprite_icon)
 ship02.sprite.batch = batch
 camera.objects.append(ship02)
 
-ship02.maneuver_type = ["orbit", 300]
+ship02.maneuver_type = ["orbit", 500]
 
 # Update function (called every frame or interval)
 def update(dt):
