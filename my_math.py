@@ -13,4 +13,23 @@ def distance(pos1, pos2):
 def direction(pos1, pos2):
     dif = difference(pos1, pos2)
     dist = distance(pos1, pos2)
+    if dist == 0:
+        return [0, 0]
     return [dif[0]/dist, dif[1]/dist]
+
+def normal(vector):
+    return [-vector[1], vector[0]]
+
+def angle_between_points(pos1, pos2):
+    dif = difference(pos1, pos2)
+    angle_rad = math.atan2(dif[1], dif[0])
+    angle_deg = math.degrees(angle_rad)
+    return angle_deg
+
+def angle_from_vector(vector):
+    angle_rad = math.atan2(vector[1], vector[0])
+    angle_deg = math.degrees(angle_rad)
+    return angle_deg
+
+def scale(vector, scale):
+    return [vector[0] * scale, vector[1] * scale]

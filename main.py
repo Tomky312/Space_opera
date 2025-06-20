@@ -14,12 +14,24 @@ glClearColor(100/255.0, 100/255.0, 230/255.0, 1.0)
 batch = pyglet.graphics.Batch()
 camera = camera.Camera()
 
-ship01 = ship.Ship([0, 0], resources.sprite_ship)
+ship01 = ship.Ship([0, 0], resources.image_ship, resources.sprite_icon)
 ship01.sprite.batch = batch
+camera.objects.append(ship01)
+
+ship02 = ship.Ship([100, 100], resources.image_ship, resources.sprite_icon)
+ship02.sprite.batch = batch
+camera.objects.append(ship02)
+
+ship02.maneuver_type = ["orbit", 300]
 
 # Update function (called every frame or interval)
 def update(dt):
-    ship01.update(camera)
+    ship02.maneuver_target = [ship01.world_pos[0], ship01.world_pos[1]]
+
+    ship01.update()
+    ship02.update()
+
+    camera.draw_objects()
 
 @window.event
 def on_draw():
