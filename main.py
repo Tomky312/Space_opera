@@ -20,6 +20,7 @@ camera.objects.append(ship01)
 
 ship02 = ship.Ship([100, 100], resources.image_ship, resources.sprite_icon)
 ship02.sprite.batch = batch
+ship02.debug_sprite.batch = batch
 camera.objects.append(ship02)
 
 ship02.maneuver_type = ["orbit", 500]
@@ -30,6 +31,10 @@ def update(dt):
 
     ship01.update()
     ship02.update()
+
+    point = camera.world_to_screen(ship02.world_dest)
+    ship02.debug_sprite.x = point[0]
+    ship02.debug_sprite.y = point[1]
 
     camera.draw_objects()
 

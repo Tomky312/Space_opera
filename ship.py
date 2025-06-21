@@ -22,6 +22,8 @@ class Ship:
         self.maneuver()
 
     def move(self):
+        print(my_math.size(self.velocity))
+
         self.velocity[0] *= 1 - self.acceleration / self.max_speed
         self.velocity[1] *= 1 - self.acceleration / self.max_speed
 
@@ -88,8 +90,8 @@ class Ship:
             point_at_distance[1] += self.maneuver_target[1]
             normal = my_math.normal(dir_to_self)
 
-            self.world_dest[0] = point_at_distance[0] - normal[0] * my_math.size(self.velocity) * 60
-            self.world_dest[1] = point_at_distance[1] - normal[1] * my_math.size(self.velocity) * 60
+            self.world_dest[0] = point_at_distance[0] + normal[0] * self.maneuver_type[1] / 2
+            self.world_dest[1] = point_at_distance[1] + normal[1] * self.maneuver_type[1] / 2
 
         elif self.maneuver_type[0] == "keep_at_range":
             dir_to_self = my_math.direction(self.maneuver_target, self.world_pos)
