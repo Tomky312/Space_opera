@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import pyglet
 from pyglet.gl import glClearColor
 
@@ -14,23 +16,32 @@ glClearColor(100/255.0, 100/255.0, 230/255.0, 1.0)
 batch = pyglet.graphics.Batch()
 camera = camera.Camera()
 
+# tick timer for delayed actions
+tick = 0
+tick_max = 60
+
 ship01 = ship.Ship([0, 0], resources.image_ship, resources.sprite_icon)
 ship01.sprite.batch = batch
 camera.objects.append(ship01)
 
-ship02 = ship.Ship([100, 100], resources.image_ship, resources.sprite_icon)
+ship02 = ship.Ship([-100, -100], resources.image_ship, resources.sprite_icon)
 ship02.sprite.batch = batch
 ship02.debug_sprite.batch = batch
 camera.objects.append(ship02)
 
-ship02.maneuver_type = ["orbit", 500]
+ship02.maneuver_type = ["orbit", 5000]
 
 # Update function (called every frame or interval)
 def update(dt):
+    global tick
+    tick += 1
+    if tick > tick_max:
+        tick = 0
+
     ship02.maneuver_target = [ship01.world_pos[0], ship01.world_pos[1]]
 
-    ship01.update()
-    ship02.update()
+    ship01.update(tick)
+    ship02.update(tick)
 
     point = camera.world_to_screen(ship02.world_dest)
     ship02.debug_sprite.x = point[0]

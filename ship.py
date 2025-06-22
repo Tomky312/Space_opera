@@ -16,13 +16,12 @@ class Ship:
         self.maneuver_type = ["none", 0]
         self.maneuver_target = [0, 0]
 
-    def update(self):
+    def update(self, tick):
         self.move()
         self.rotate()
-        self.maneuver()
+        self.maneuver(tick)
 
     def move(self):
-        print(my_math.size(self.velocity))
 
         self.velocity[0] *= 1 - self.acceleration / self.max_speed
         self.velocity[1] *= 1 - self.acceleration / self.max_speed
@@ -79,7 +78,11 @@ class Ship:
         elif dif_angle < 0:
             self.sprite.rotation -= min(self.acceleration * abs(dif_angle), self.acceleration * 10)
 
-    def maneuver(self):
+    def maneuver(self, tick):
+        if tick == 0:
+            pass
+        else:
+            return
         if self.maneuver_type[0] == "none":
             return
 
@@ -90,8 +93,17 @@ class Ship:
             point_at_distance[1] += self.maneuver_target[1]
             normal = my_math.normal(dir_to_self)
 
-            self.world_dest[0] = point_at_distance[0] + normal[0] * self.maneuver_type[1] / 2
-            self.world_dest[1] = point_at_distance[1] + normal[1] * self.maneuver_type[1] / 2
+            point_at_distance[0] = point_at_distance[0] + normal[0] * self.maneuver_type[1]
+            point_at_distance[1] = point_at_distance[1] + normal[1] * self.maneuver_type[1]
+
+            dir_to_center = my_math.direction(point_at_distance, self.maneuver_target)
+
+            point_at_distance[0] += dir_to_center[0] * self.maneuver_type[1]/3
+            point_at_distance[1] += dir_to_center[1] * self.maneuver_type[1]/3
+
+            self.world_dest[0] = point_at_distance[0]
+            self.world_dest[1] = point_at_distance[1]
+
 
         elif self.maneuver_type[0] == "keep_at_range":
             dir_to_self = my_math.direction(self.maneuver_target, self.world_pos)
