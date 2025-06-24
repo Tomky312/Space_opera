@@ -8,6 +8,12 @@ class Camera:
 
         self.mov_speed = 1
 
+        self.tracking_obj = None
+
+    def update(self):
+        self.track()
+        self.draw_objects()
+
     def set_move(self):
         pass
 
@@ -20,3 +26,7 @@ class Camera:
             screen_pos = self.world_to_screen(object.world_pos)
             object.sprite.x = screen_pos[0]
             object.sprite.y = screen_pos[1]
+
+    def track(self):
+        if self.tracking_obj:
+            self.pos = [-self.tracking_obj.world_pos[0], -self.tracking_obj.world_pos[1]]

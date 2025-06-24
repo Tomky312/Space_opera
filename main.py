@@ -7,47 +7,45 @@ import resources
 import resources as res
 import ship
 import camera
+import space_gunk
 
 # Create a window
-window = pyglet.window.Window(width=2000, height=1100, caption="Basic Pyglet Game Loop")
+WIDTH = 2000
+HEIGHT = 1100
+window = pyglet.window.Window(width=WIDTH, height=HEIGHT, caption="Basic Pyglet Game Loop")
 
 #   set colour after clear call
-glClearColor(100/255.0, 100/255.0, 230/255.0, 1.0)
+glClearColor(50/255.0, 70/255.0, 150/255.0, 1.0)
 batch = pyglet.graphics.Batch()
 camera = camera.Camera()
 
 # tick timer for delayed actions
-tick = 0
+TICK = 0
 tick_max = 60
 
 ship01 = ship.Ship([0, 0], resources.image_ship, resources.sprite_icon)
 ship01.sprite.batch = batch
 camera.objects.append(ship01)
+camera.tracking_obj = ship01
 
-ship02 = ship.Ship([-100, -100], resources.image_ship, resources.sprite_icon)
-ship02.sprite.batch = batch
-ship02.debug_sprite.batch = batch
-camera.objects.append(ship02)
+ship01.maneuver_type = "orbit"
+ship01.maneuver_target = [100, 100]
+ship01.maneuver_dist = 500
 
-ship02.maneuver_type = ["orbit", 5000]
+gunk01 = space_gunk.SpaceGunk([250, 250], resources.image_space_gunk)
+gunk01.sprite.batch = batch
+camera.objects.append(gunk01)
 
 # Update function (called every frame or interval)
 def update(dt):
-    global tick
-    tick += 1
-    if tick > tick_max:
-        tick = 0
+    global TICK
+    TICK += 1
+    if TICK > tick_max:
+        TICK = 0
 
-    ship02.maneuver_target = [ship01.world_pos[0], ship01.world_pos[1]]
+    ship01.update(TICK)
 
-    ship01.update(tick)
-    ship02.update(tick)
-
-    point = camera.world_to_screen(ship02.world_dest)
-    ship02.debug_sprite.x = point[0]
-    ship02.debug_sprite.y = point[1]
-
-    camera.draw_objects()
+    camera.update()
 
 @window.event
 def on_draw():
@@ -65,7 +63,7 @@ def on_key_release(symbol, modifiers):
 
 @window.event
 def on_mouse_press(x, y, button, modifiers):
-    ship01.world_dest = [x - camera.center[0], y - camera.center[1]]
+    pass
 
 @window.event
 def on_mouse_scroll(x, y, scroll_x, scroll_y):
