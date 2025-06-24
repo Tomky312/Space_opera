@@ -7,16 +7,20 @@ import resources
 import resources as res
 import ship
 import camera
-import space_gunk
 
 # Create a window
 WIDTH = 2000
 HEIGHT = 1100
 window = pyglet.window.Window(width=WIDTH, height=HEIGHT, caption="Basic Pyglet Game Loop")
 
+batch = pyglet.graphics.Batch()
+
+# background sprite
+background_sprite = pyglet.sprite.Sprite(resources.image_background)
+background_sprite.batch = batch
+
 #   set colour after clear call
 glClearColor(50/255.0, 70/255.0, 150/255.0, 1.0)
-batch = pyglet.graphics.Batch()
 camera = camera.Camera()
 
 # tick timer for delayed actions
@@ -31,10 +35,6 @@ camera.tracking_obj = ship01
 ship01.maneuver_type = "orbit"
 ship01.maneuver_target = [100, 100]
 ship01.maneuver_dist = 500
-
-gunk01 = space_gunk.SpaceGunk([250, 250], resources.image_space_gunk)
-gunk01.sprite.batch = batch
-camera.objects.append(gunk01)
 
 # Update function (called every frame or interval)
 def update(dt):

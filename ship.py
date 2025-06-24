@@ -5,7 +5,6 @@ class Ship:
     def __init__(self, world_pos, image, debug_sprite):
         self.world_pos = world_pos
         self.sprite = pyglet.sprite.Sprite(image)
-        self.debug_sprite = debug_sprite
 
         self.max_speed = 20
         self.acceleration = 0.1

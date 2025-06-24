@@ -188,3 +188,10 @@ def rotate_around_point(pos, center_pos, angle):
     new_y += center_pos[1]
 
     return [new_x, new_y]
+
+def check_in_bounds(self, size_x, size_y, pos):
+    if size_x > pos[0] > 0 and size_y > pos[1] > 0:
+        return True
+
+    else:
+        return False

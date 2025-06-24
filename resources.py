@@ -27,7 +27,12 @@ def load_centered_image(image_path):
     return image
 
 image_ship = load_centered_image("ship.png")
-image_space_gunk = load_centered_image("space_gunk.png")
+
+image_asteroid_01 = load_centered_image("assets/asteroids/ast01.png")
+image_asteroid_02 = load_centered_image("assets/asteroids/ast02.png")
+image_asteroid_03 = load_centered_image("assets/asteroids/ast03.png")
+
+image_background = load_centered_image("background.jpg")
 
 image_icon = load_centered_image("green_icon.png")
 sprite_icon = pyglet.sprite.Sprite(image_icon)
