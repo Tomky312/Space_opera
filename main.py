@@ -6,6 +6,8 @@ from pyglet.gl import glClearColor
 import resources
 import ship
 import camera
+import field
+from game import Game
 
 # Create a window
 WIDTH = 2000
@@ -20,20 +22,20 @@ background_sprite.batch = batch
 
 #   set colour after clear call
 glClearColor(50/255.0, 70/255.0, 150/255.0, 1.0)
-camera = camera.Camera()
 
 # tick timer for delayed actions
 TICK = 0
 tick_max = 60
 
-ship01 = ship.Ship([0, 0], resources.image_ship, resources.sprite_icon)
-ship01.sprite.batch = batch
-camera.objects.append(ship01)
-camera.tracking_obj = ship01
+### -----------------------------------------------
+game = Game()
+camera = camera.Camera(game)
+field01 = field.Field(game)
+game.current_field = field01
 
-ship01.maneuver_type = "orbit"
-ship01.maneuver_target = [100, 100]
-ship01.maneuver_dist = 500
+ship01 = ship.Ship(field01, [10, 10], resources.image_ship)
+ship01.sprite.batch = batch
+
 
 # Update function (called every frame or interval)
 def update(dt):
@@ -42,9 +44,7 @@ def update(dt):
     if TICK > tick_max:
         TICK = 0
 
-    ship01.update(TICK)
-
-    camera.update()
+    game.update(TICK)
 
 @window.event
 def on_draw():

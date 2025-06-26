@@ -1,16 +1,19 @@
 
 class Camera:
-    def __init__(self):
-        self.objects = []
+    def __init__(self, game):
+        # chain setup
+        self.game = game
+        self.game.camera = self
+        # ---
 
-        self.center = [1000, 550]
+        self.center = [800, 400]
         self.pos = [0, 0]
 
         self.mov_speed = 1
 
         self.tracking_obj = None
 
-    def update(self):
+    def update(self, TICK):
         self.track()
         self.draw_objects()
 
@@ -22,10 +25,18 @@ class Camera:
         return screen_pos
 
     def draw_objects(self):
-        for object in self.objects:
-            screen_pos = self.world_to_screen(object.world_pos)
-            object.sprite.x = screen_pos[0]
-            object.sprite.y = screen_pos[1]
+        for station in self.game.current_field.stations:
+            screen_pos = self.world_to_screen(station.world_pos)
+            station.sprite.x = screen_pos[0]
+            station.sprite.y = screen_pos[1]
+        for ship in self.game.current_field.ships:
+            screen_pos = self.world_to_screen(ship.world_pos)
+            ship.sprite.x = screen_pos[0]
+            ship.sprite.y = screen_pos[1]
+        for asteroid in self.game.current_field.asteroids:
+            screen_pos = self.world_to_screen(asteroid.world_pos)
+            asteroid.sprite.x = screen_pos[0]
+            asteroid.sprite.y = screen_pos[1]
 
     def track(self):
         if self.tracking_obj:

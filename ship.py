@@ -2,7 +2,12 @@ import pyglet
 import my_math
 
 class Ship:
-    def __init__(self, world_pos, image, debug_sprite):
+    def __init__(self, field, world_pos, image):
+        # chain setup
+        self.field = field
+        self.field.ships.append(self)
+        # ---
+
         self.world_pos = world_pos
         self.sprite = pyglet.sprite.Sprite(image)
 
@@ -16,10 +21,10 @@ class Ship:
         self.maneuver_target = [0, 0]
         self.maneuver_dist = 10
 
-    def update(self, tick):
+    def update(self, TICK):
         self.move()
         self.rotate()
-        self.maneuver(tick)
+        self.maneuver(TICK)
 
     def move(self):
 
@@ -87,8 +92,8 @@ class Ship:
         elif angle_difference < 0:
             self.sprite.rotation -= rotation_speed
 
-    def maneuver(self, tick):
-        if tick == 0:
+    def maneuver(self, TICK):
+        if TICK == 0:
             pass
         else:
             return
