@@ -7,9 +7,9 @@ class Ship:
         self.field = field
         self.field.ships.append(self)
         # ---
+        self.sprite = pyglet.sprite.Sprite(image)
 
         self.world_pos = world_pos
-        self.sprite = pyglet.sprite.Sprite(image)
 
         self.max_speed = 20
         self.acceleration = 0.1
@@ -18,7 +18,7 @@ class Ship:
         self.world_dest = [world_pos[0], world_pos[1]]
 
         self.maneuver_type = "none"
-        self.maneuver_target = [0, 0]
+        self.maneuver_target = None
         self.maneuver_dist = 10
 
     def update(self, TICK):
@@ -93,7 +93,7 @@ class Ship:
             self.sprite.rotation -= rotation_speed
 
     def maneuver(self, TICK):
-        if TICK == 0:
+        if TICK == 0 or TICK == 20 or TICK == 40:
             pass
         else:
             return
@@ -104,12 +104,12 @@ class Ship:
             orbit_radius = self.maneuver_dist
 
             # Get direction from target to current position
-            dir_to_self = my_math.direction(self.maneuver_target, self.world_pos)
+            dir_to_self = my_math.direction(self.maneuver_target.world_pos, self.world_pos)
 
             # Start with a point at orbit distance from target
             orbit_point = my_math.scale(dir_to_self, orbit_radius)
-            orbit_point[0] += self.maneuver_target[0]
-            orbit_point[1] += self.maneuver_target[1]
+            orbit_point[0] += self.maneuver_target.world_pos[0]
+            orbit_point[1] += self.maneuver_target.world_pos[1]
 
             # Move perpendicular to create orbital offset
             perpendicular = my_math.normal(dir_to_self)
@@ -117,7 +117,7 @@ class Ship:
             orbit_point[1] += perpendicular[1] * orbit_radius
 
             # Pull slightly back toward center for spiral effect
-            dir_to_center = my_math.direction(orbit_point, self.maneuver_target)
+            dir_to_center = my_math.direction(orbit_point, self.maneuver_target.world_pos)
             inward_pull = my_math.scale(dir_to_center, orbit_radius / 3)
             orbit_point[0] += inward_pull[0]
             orbit_point[1] += inward_pull[1]
