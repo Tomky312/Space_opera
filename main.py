@@ -4,7 +4,6 @@ import pyglet
 from pyglet.gl import glClearColor
 
 import resources
-import resources as res
 import ship
 import camera
 
