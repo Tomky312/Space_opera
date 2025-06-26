@@ -5,6 +5,7 @@ class Game:
         self.camera = None
         self.fields = []
         self.current_field = None
+        self.menus = []
 
     def update(self, TICK):
         self.camera.update(TICK)

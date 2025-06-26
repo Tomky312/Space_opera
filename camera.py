@@ -1,15 +1,14 @@
 import pyglet
 
 class Camera:
-    def __init__(self, game, WIDTH, HEIGHT):
+    def __init__(self, game, window):
         # chain setup
         self.game = game
         self.game.camera = self
         # ---
-        self.WIDTH = WIDTH
-        self.height = HEIGHT
+        self.window = window
 
-        self.center = [WIDTH // 2, HEIGHT // 2]
+        self.center = [window.width // 2, window.height // 2]
         self.pos = [0, 0]
 
         self.mov_speed = 1

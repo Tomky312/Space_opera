@@ -9,11 +9,10 @@ import camera
 import field
 from game import Game
 import asteroid
+import overview_menu
 
 # Create a window
-WIDTH = 2000
-HEIGHT = 1000
-window = pyglet.window.Window(width=WIDTH, height=HEIGHT, caption="Basic Pyglet Game Loop")
+window = pyglet.window.Window(width=2000, height=1000, caption="Basic Pyglet Game Loop")
 
 batch = pyglet.graphics.Batch()
 
@@ -30,7 +29,7 @@ tick_max = 60
 
 ### -----------------------------------------------
 game = Game()
-camera = camera.Camera(game, WIDTH, HEIGHT)
+camera = camera.Camera(game, window)
 field01 = field.Field(game)
 game.current_field = field01
 
@@ -45,6 +44,10 @@ camera.tracking_obj = ship01
 ship01.maneuver_target = asteroid01
 ship01.maneuver_dist = 600
 ship01.maneuver_type = "orbit"
+
+### --------- MENUS ------------
+main_overview_menu = overview_menu.OverviewMenu(window, resources.image_overview_menu, game)
+main_overview_menu.sprite.batch = batch
 
 
 # Update function (called every frame or interval)

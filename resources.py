@@ -26,13 +26,17 @@ def load_centered_image(image_path):
 
     return image
 
-image_ship = load_centered_image("ship.png")
+image_ship = load_centered_image("assets/ships/test.png")
 
 image_asteroid_01 = load_centered_image("assets/asteroids/ast01.png")
 image_asteroid_02 = load_centered_image("assets/asteroids/ast02.png")
 image_asteroid_03 = load_centered_image("assets/asteroids/ast03.png")
 
-image_background = load_centered_image("background.jpg")
+image_background = load_centered_image("assets/background/01.jpg")
+
+image_overview_menu = load_centered_image("assets/UI/overview_menu_dark.png")
+image_overview_menu.anchor_x = image_overview_menu.width
+image_overview_menu.anchor_y = image_overview_menu.height
 
 image_icon = load_centered_image("green_icon.png")
 sprite_icon = pyglet.sprite.Sprite(image_icon)
