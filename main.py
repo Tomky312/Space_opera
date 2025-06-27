@@ -9,7 +9,6 @@ import camera
 import field
 from game import Game
 import asteroid
-import overview_menu
 
 # Create a window
 window = pyglet.window.Window(width=2000, height=1000, caption="Basic Pyglet Game Loop")

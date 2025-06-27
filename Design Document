@@ -1,0 +1,47 @@
+
+----- -----Ships classes and scale----- -----
+
+At zoom 1 (default zoom) the scale of the world is 1 pixel = 1 meter
+Maximum zoom level is based on the size of the ship.
+
+Ship Classes:
+    (small)
+    - Corvette
+        - small fast and nimble, cost efficient, lacks versatility
+        - 15 to 20 meters long (20x zoom)
+    - Drone Corvette
+        - used by carriers, very cost efficient
+        - 12 to 16 meters long (20x zoom)
+    - Frigate
+        - small and fast versatile vessel, basic versatility
+        - 30 to 40 meters long (10x zoom)
+    (medium)
+    - Destroyer
+        - slower armored combat ship, cost efficient, lacks versatility
+        - 120 to 150 meters long (3x zoom)
+    - Cruiser
+        - Fast versatile combat ship, great versatility
+        - 120 to 180 meters long (3x zoom)
+    - Drone Cruiser
+        - used by fleet carriers, very cost efficient
+        - 100 to 150 meters long (3x zoom)
+    (large)
+    - Battlecruiser
+        - Fast less armoured ships, basic versatility
+        - 300 to 400 meters long (2x zoom)
+    - Battleship
+        - Slower general combat vessel, grat versatility
+        - 350 to 450 meters long (2x zoom)
+    - Carriers
+        - slow support vessels, offer repairs and ammo, high sensor strength (can carry drone corvettes)
+        - 350 to 450 meters long (2x zoom)
+    (capital)
+    - Enforcer
+        - faster (for its size) general combat vessels, great versatility, cost inefficient
+        - 600 to 800 meters long (1x zoom)
+    - Dreadnought
+        - slow, heavily armored combat vessels, high survivability, cost efficient
+        - 1500 to 2000 meters long (0.5x zoom)
+    - Fleet Carriers
+        - Offer same benefits as carriers, able to carry (can carry drone cruisers)
+        - 1200 to 1600 meters long (0.5x zoom)
