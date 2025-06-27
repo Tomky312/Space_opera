@@ -46,8 +46,6 @@ ship01.maneuver_dist = 600
 ship01.maneuver_type = "orbit"
 
 ### --------- MENUS ------------
-main_overview_menu = overview_menu.OverviewMenu(window, resources.image_overview_menu, game)
-main_overview_menu.sprite.batch = batch
 
 
 # Update function (called every frame or interval)
