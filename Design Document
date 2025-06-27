@@ -1,5 +1,5 @@
 
------ -----Ships classes and scale----- -----
+----- -----Ship classes and scale----- -----
 
 At zoom 1 (default zoom) the scale of the world is 1 pixel = 1 meter
 Maximum zoom level is based on the size of the ship.
@@ -45,3 +45,23 @@ Ship Classes:
     - Fleet Carriers
         - Offer same benefits as carriers, able to carry (can carry drone cruisers)
         - 1200 to 1600 meters long (0.5x zoom)
+
+----- ----- Weapon types and mechanics ----- -----
+Weapon size
+    - weapon sizes match ship sizes
+
+Weapon types and general stats
+relative stats will be judged on a low/medium/good/great scale with 1/2/3/4 points accordingly
+cost is judged on a scale cheap/expensive
+
+    - Autocannons (7 points)
+        - medium range and accuracy, good DPS, cheap
+    - Cannons (6 points)
+        - good range, low accuracy, medium DPS, cheap
+    - Railguns (8 points)
+        - great range, low accuracy, good DPS, expensive
+    - Lasers (7 points)
+        - low range, great accuracy, medium DPS, expensive
+    - Missiles (9 points)
+        - good range, good accuracy, good DPS, cheap, very expensive ammo
+        - can be shot down
