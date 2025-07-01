@@ -1,50 +1,87 @@
+----- ----- Asteroids ----- -----
+
+
+----- -----Ships drawing steps----- -----
+    - Main deck shape
+    - Engines shape
+    - upper and lover decks shape
+    - final hull shape on a new layer
+    - hardpoints
+    - hull plates, armor reinforcements (bulkheads)
+    - vents, power highlights (reactor core, solar panels)
+    - Doors, hangars, windows
+    - Main color palette (main, secondary, main dark)
+    - Markings (yellow, numbers, stripes, emblems)
+    - Dirt
+
+    - Damaged version
+    - Destroyed version
 
 ----- -----Ship classes and scale----- -----
 
 At zoom 1 (default zoom) the scale of the world is 1 pixel = 1 meter
 Maximum zoom level is based on the size of the ship.
 
-Ship Classes:
-    (small)
+General Ship Classes:
+    (small 1m = 10px)
     - Corvette
         - small fast and nimble, cost efficient, lacks versatility
-        - 15 to 20 meters long (20x zoom)
+        - 15 to 20 meters long
+        - 1-2S
     - Drone Corvette
         - used by carriers, very cost efficient
-        - 12 to 16 meters long (20x zoom)
+        - 12 to 16 meters long
+        - 1S
     - Frigate
         - small and fast versatile vessel, basic versatility
-        - 30 to 40 meters long (10x zoom)
-    (medium)
+        - 30 to 40 meters long
+        - 3-4S
+    (medium 1m = 5px)
     - Destroyer
         - slower armored combat ship, cost efficient, lacks versatility
-        - 120 to 150 meters long (3x zoom)
+        - 120 to 150 meters long
+        - 2-3M
     - Cruiser
         - Fast versatile combat ship, great versatility
-        - 120 to 180 meters long (3x zoom)
+        - 120 to 180 meters long
+        - 2-4M
     - Drone Cruiser
         - used by fleet carriers, very cost efficient
-        - 100 to 150 meters long (3x zoom)
-    (large)
+        - 100 to 150 meters long
+        - 2-3M
+    (large 1m = 3px)
     - Battlecruiser
         - Fast less armoured ships, basic versatility
-        - 300 to 400 meters long (2x zoom)
+        - 300 to 400 meters long)
+        - 2-3L
     - Battleship
         - Slower general combat vessel, grat versatility
-        - 350 to 450 meters long (2x zoom)
+        - 350 to 450 meters long
+        - 3-5L
     - Carriers
         - slow support vessels, offer repairs and ammo, high sensor strength (can carry drone corvettes)
-        - 350 to 450 meters long (2x zoom)
-    (capital)
+        - 350 to 450 meters long
+    (capital 1m = 2px)
     - Enforcer
         - faster (for its size) general combat vessels, great versatility, cost inefficient
-        - 600 to 800 meters long (1x zoom)
+        - 600 to 800 meters long
+        - 2XL
     - Dreadnought
         - slow, heavily armored combat vessels, high survivability, cost efficient
-        - 1500 to 2000 meters long (0.5x zoom)
+        - 1500 to 2000 meters long
+        - 3-4XL
     - Fleet Carriers
         - Offer same benefits as carriers, able to carry (can carry drone cruisers)
-        - 1200 to 1600 meters long (0.5x zoom)
+        - 1200 to 1600 meters long
+
+Mining ship classes
+    - Excavator
+        - small to medium mining vessel not able to process ores on its own
+    - Harvester
+        - medium to large mining vessel able to process ores on its own
+    - Dredger
+        - large mining vessel able to process ores on its own, armed and armoured for combat deployment
+
 
 ----- ----- Weapon types and mechanics ----- -----
 Weapon size
@@ -65,3 +102,5 @@ cost is judged on a scale cheap/expensive
     - Missiles (9 points)
         - good range, good accuracy, good DPS, cheap, very expensive ammo
         - can be shot down
+
+
