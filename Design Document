@@ -5,7 +5,6 @@
     - Main deck shape
     - Engines shape
     - upper and lover decks shape
-    - final hull shape on a new layer
     - hardpoints
     - hull plates, armor reinforcements (bulkheads)
     - vents, power highlights (reactor core, solar panels)
@@ -38,7 +37,8 @@ General Ship Classes:
         - 3-4S
     (medium 1m = 5px)
     - Destroyer
-        - slower armored combat ship, cost efficient, lacks versatility
+        - slower armored combat ship, cost efficient, lacks ver
+        satility
         - 120 to 150 meters long
         - 2-3M
     - Cruiser
