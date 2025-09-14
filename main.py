@@ -26,7 +26,7 @@ glClearColor(50/255.0, 70/255.0, 150/255.0, 1.0)
 TICK = 0
 tick_max = 60
 
-### -----------------------------------------------
+### ---------------------ACTIVE--------------------------
 game = Game()
 camera = camera.Camera(game, window)
 field01 = field.Field(game)
