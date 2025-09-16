@@ -35,10 +35,10 @@ game.current_field = field01
 ship01 = ship.Ship(field01, [200, 200], resources.image_ship)
 ship01.sprite.batch = batch
 
-asteroid01 = asteroid.Asteroid(field01, [500, 500], resources.image_asteroid_01)
+asteroid01 = asteroid.Asteroid(field01, [500, 500], resources.image_asteroid)
 asteroid01.sprite.batch = batch
 
-camera.tracking_obj = ship01
+# camera.tracking_obj = ship01
 
 ship01.maneuver_target = asteroid01
 ship01.maneuver_dist = 600
