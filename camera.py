@@ -13,7 +13,7 @@ class Camera:
         # --- zoom ---
         self.desired_zoom_level = 1.0
         self.current_zoom_level = 1.0
-        self.min_zoom = 0.05
+        self.min_zoom = 0.04
         self.max_zoom = 1.0
 
         # --- position ---
@@ -83,10 +83,14 @@ class Camera:
             self.current_pos[1] = self.desired_pos[1]
 
     def world_to_screen(self, pos: list[float]):
-        return [
-            (pos[0] + self.current_pos[0]) * self.current_zoom_level + self.center[0],
-            (pos[1] + self.current_pos[1]) * self.current_zoom_level + self.center[1]
-        ]
+        screen_x =  (pos[0] + self.current_pos[0]) * self.current_zoom_level + self.center[0]
+        screen_y = (pos[1] + self.current_pos[1]) * self.current_zoom_level + self.center[1]
+        return [screen_x, screen_y]
+
+    def screen_to_world(self, screen_pos: list[float]) -> list[float]:
+        world_x = (screen_pos[0] - self.center[0]) / self.current_zoom_level - self.current_pos[0]
+        world_y = (screen_pos[1] - self.center[1]) / self.current_zoom_level - self.current_pos[1]
+        return [world_x, world_y]
 
     def draw_objects(self):
         for station in self.game.current_field.stations:
