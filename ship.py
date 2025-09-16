@@ -21,6 +21,8 @@ class Ship:
         self.maneuver_target = None
         self.maneuver_dist = 10
 
+        self.selected = False
+
     def update(self, TICK):
         self.move()
         self.rotate()
@@ -142,6 +144,24 @@ class Ship:
             # Set as destination
             self.world_dest[0] = range_position[0]
             self.world_dest[1] = range_position[1]
+
+    def select(self, mpos_x, mpos_y, camera, radius=15):
+        """
+        Checks if the mouse is close enough to the ship on screen to select it.
+        :param mpos_x: Mouse X position (screen coordinates)
+        :param mpos_y: Mouse Y position (screen coordinates)
+        :param camera: Camera instance to convert world_pos -> screen_pos
+        :param radius: Maximum distance in pixels to count as a selection
+        """
+        screen_pos = camera.world_to_screen(self.world_pos)
+        dx = mpos_x - screen_pos[0]
+        dy = mpos_y - screen_pos[1]
+        distance_squared = dx * dx + dy * dy
+
+        if distance_squared <= radius * radius:
+            self.selected = True
+        else:
+            self.selected = False
 
 
 

@@ -72,7 +72,8 @@ def on_key_release(symbol, modifiers):
 
 @window.event
 def on_mouse_press(x, y, button, modifiers):
-    pass
+    for ship in game.current_field.ships:
+        ship.select(x, y, game.camera)
 
 @window.event
 def on_mouse_scroll(x, y, scroll_x, scroll_y):
