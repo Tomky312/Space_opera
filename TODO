@@ -1,8 +1,20 @@
 ---- ---- TODO future ---- ----
 
 ---- ---- TODO curent ---- ----
-Create ship info panels
+    UI BLOCK
+    create a roster of ship icons
+        -military
+        -industrial
+        -stations
+    Create a ship overview panel
 
-draw mining ship
-mining mechanics with cargo hold
+    ECONOMY BLOCK
+    create mining operation
+        -asteroids to mine
+        -assigned mining ships
+        -assigned refinery ships
+        -assigned transport ships
+        -assigned drop of depot
+
+    COMBAT BLOCK
 ---- ---- TODO done ---- ----

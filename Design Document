@@ -18,11 +18,8 @@
 
 ----- -----Ship classes and scale----- -----
 
-At zoom 1 (default zoom) the scale of the world is 1 pixel = 1 meter
-Maximum zoom level is based on the size of the ship.
-
 General Ship Classes:
-    (small 1m = 10px)
+    (small)
     - Corvette
         - small fast and nimble, cost efficient, lacks versatility
         - 15 to 20 meters long
@@ -35,7 +32,7 @@ General Ship Classes:
         - small and fast versatile vessel, basic versatility
         - 30 to 40 meters long
         - 3-4S
-    (medium 1m = 5px)
+    (medium)
     - Destroyer
         - slower armored combat ship, cost efficient, lacks ver
         satility
@@ -49,7 +46,7 @@ General Ship Classes:
         - used by fleet carriers, very cost efficient
         - 100 to 150 meters long
         - 2-3M
-    (large 1m = 3px)
+    (large)
     - Battlecruiser
         - Fast less armoured ships, basic versatility
         - 300 to 400 meters long)
@@ -61,7 +58,7 @@ General Ship Classes:
     - Carriers
         - slow support vessels, offer repairs and ammo, high sensor strength (can carry drone corvettes)
         - 350 to 450 meters long
-    (capital 1m = 2px)
+    (capital)
     - Enforcer
         - faster (for its size) general combat vessels, great versatility, cost inefficient
         - 600 to 800 meters long
