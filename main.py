@@ -76,7 +76,7 @@ def on_mouse_press(x, y, button, modifiers):
 
 @window.event
 def on_mouse_scroll(x, y, scroll_x, scroll_y):
-    pass
+    game.camera.set_zoom(scroll_y, x, y)
 
 
 # Schedule the update function to be called regularly

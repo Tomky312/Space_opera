@@ -8,8 +8,6 @@
         -stations
     Create a ship overview panel
 
-    Create camera movement
-
     ECONOMY BLOCK
     create mining operation
         -asteroids to mine
@@ -20,3 +18,5 @@
 
     COMBAT BLOCK
 ---- ---- TODO done ---- ----
+
+Create camera movement
