@@ -11,16 +11,34 @@ class Camera:
         self.center = [window.width // 2, window.height // 2]
         self.pos = [0, 0]
 
-        self.mov_speed = 1
+        self.mov_speed = 5
 
         self.tracking_obj = None
 
     def update(self, TICK):
         self.track()
         self.draw_objects()
+        self.set_move()
 
     def set_move(self):
-        pass
+        # Get mouse position
+        mouse_x, mouse_y = self.window._mouse_x, self.window._mouse_y
+        speed = self.mov_speed
+
+        # Define edge threshold (px from edge where camera starts moving)
+        edge_threshold = 20
+
+        # Horizontal movement
+        if mouse_x < edge_threshold:
+            self.pos[0] += speed
+        elif mouse_x > self.window.width - edge_threshold:
+            self.pos[0] -= speed
+
+        # Vertical movement
+        if mouse_y < edge_threshold:
+            self.pos[1] += speed
+        elif mouse_y > self.window.height - edge_threshold:
+            self.pos[1] -= speed
 
     def world_to_screen(self, pos: list[float]):
         screen_pos = [pos[0] + self.center[0] + self.pos[0], pos[1] + self.center[1] + self.pos[1]]
