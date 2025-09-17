@@ -11,7 +11,7 @@ class Ship:
 
         self.world_pos = world_pos
 
-        self.max_speed = 20
+        self.max_speed = 10
         self.acceleration = 0.1
         self.velocity = [0, 0]
 
@@ -25,7 +25,7 @@ class Ship:
 
     def update(self, TICK):
         self.move()
-        self.rotate()
+        # self.rotate()
         self.maneuver(TICK)
 
     def move(self):

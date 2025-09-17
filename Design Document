@@ -55,7 +55,7 @@ General Ship Classes:
         - Slower general combat vessel, grat versatility
         - 350 to 450 meters long
         - 3-5L
-    - Carriers
+    - Carrier
         - slow support vessels, offer repairs and ammo, high sensor strength (can carry drone corvettes)
         - 350 to 450 meters long
     (capital)
@@ -73,12 +73,20 @@ General Ship Classes:
 
 Mining ship classes
     - Prospector
-        - small to medium mining vessel not able to process ores on its own
+        - Small mining vessel
+        - quick deployment
+        - used for fast mining operations or scanning of asteroid fields in advance of main fleet deployment
+        - low yield and efficiency
+        - fast
+    - Excavator
+        - medium mining vessel
+        - slow, slower deployment
+        - main mining workhorse
+        - medium yield and efficiency
     - Harvester
-        - medium to large mining vessel able to process ores on its own
-    - Dredger
-        - large mining vessel able to process ores on its own, armed and armoured for combat deployment
-
+        - large mining vessel
+        - slow, very long deployment
+        - large yield and efficiency
 
 ----- ----- Weapon types and mechanics ----- -----
 Weapon size

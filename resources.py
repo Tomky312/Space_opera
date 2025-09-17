@@ -27,6 +27,12 @@ def load_centered_image(image_path):
     return image
 
 image_ship = load_centered_image("assets/ships/test.png")
+image_corvette = load_centered_image("assets/ships/corvette.png")
+image_drone_corvette = load_centered_image("assets/ships/drone_corvette.png")
+image_frigate = load_centered_image("assets/ships/frigate.png")
+image_destroyer = load_centered_image("assets/ships/destroyer.png")
+image_cruiser = load_centered_image("assets/ships/cruiser.png")
+image_drone_cruiser = load_centered_image("assets/ships/drone_cruiser.png")
 
 image_asteroid = load_centered_image("assets/asteroids/asteroid.png")
 

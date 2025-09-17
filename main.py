@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import pyglet
-from pyglet.gl import glClearColor
+from pyglet.gl import *
 
 import resources
 import ship
@@ -11,7 +11,7 @@ from game import Game
 import asteroid
 
 # Create a window
-window = pyglet.window.Window(width=2000, height=1000, caption="Basic Pyglet Game Loop")
+window = pyglet.window.Window(resizable = True, width=1600, height=800, caption="Basic Pyglet Game Loop")
 
 batch = pyglet.graphics.Batch()
 
@@ -32,7 +32,7 @@ camera = camera.Camera(game, window)
 field01 = field.Field(game)
 game.current_field = field01
 
-ship01 = ship.Ship(field01, [200, 200], resources.image_ship)
+ship01 = ship.Ship(field01, [200, 200], resources.image_drone_cruiser)
 ship01.sprite.batch = batch
 
 asteroid01 = asteroid.Asteroid(field01, [500, 500], resources.image_asteroid)
@@ -41,7 +41,7 @@ asteroid01.sprite.batch = batch
 # camera.tracking_obj = ship01
 
 ship01.maneuver_target = asteroid01
-ship01.maneuver_dist = 600
+ship01.maneuver_dist = 6000
 ship01.maneuver_type = "orbit"
 
 ### --------- MENUS ------------
