@@ -1,5 +1,6 @@
 import pyglet
 import my_math
+import resources
 
 class Ship:
     def __init__(self, field, world_pos, image):
@@ -8,6 +9,7 @@ class Ship:
         self.field.ships.append(self)
         # ---
         self.sprite = pyglet.sprite.Sprite(image)
+        self.selection_circle_sprite = pyglet.sprite.Sprite(resources.image_selection_circle)
 
         self.world_pos = world_pos
 

@@ -13,8 +13,8 @@ class Camera:
         # --- zoom ---
         self.desired_zoom_level = 0.1
         self.current_zoom_level = 0.1
-        self.min_zoom = 0.01
-        self.max_zoom = 1.0
+        self.min_zoom = 0.0025
+        self.max_zoom = 0.25
 
         # --- position ---
         self.desired_pos = [0.0, 0.0]
@@ -22,11 +22,11 @@ class Camera:
 
         self.tracking_obj = None
 
-    def update(self, TICK):
+    def update(self, TICK, batch):
         self.adjust_zoom()
         self.adjust_position()
         self.track()
-        self.draw_objects()
+        self.draw_objects(batch)
         self.set_move()
 
     def set_move(self):
@@ -92,7 +92,7 @@ class Camera:
         world_y = (screen_pos[1] - self.center[1]) / self.current_zoom_level - self.current_pos[1]
         return [world_x, world_y]
 
-    def draw_objects(self):
+    def draw_objects(self, batch):
         for station in self.game.current_field.stations:
             screen_pos = self.world_to_screen(station.world_pos)
             station.sprite.x = screen_pos[0]
@@ -101,6 +101,13 @@ class Camera:
             screen_pos = self.world_to_screen(ship.world_pos)
             ship.sprite.x = screen_pos[0]
             ship.sprite.y = screen_pos[1]
+            ship.selection_circle_sprite.x = screen_pos[0]
+            ship.selection_circle_sprite.y = screen_pos[1]
+            if ship.selected:
+                ship.selection_circle_sprite.batch = batch
+            else:
+                ship.selection_circle_sprite.batch = None
+
         for asteroid in self.game.current_field.asteroids:
             screen_pos = self.world_to_screen(asteroid.world_pos)
             asteroid.sprite.x = screen_pos[0]

@@ -54,7 +54,7 @@ def update(dt):
     if TICK > tick_max:
         TICK = 0
 
-    game.update(TICK)
+    game.update(TICK, batch)
 
 @window.event
 def on_draw():
