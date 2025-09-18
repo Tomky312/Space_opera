@@ -11,9 +11,9 @@ class Camera:
         self.speed = 5
 
         # --- zoom ---
-        self.desired_zoom_level = 1.0
-        self.current_zoom_level = 1.0
-        self.min_zoom = 0.04
+        self.desired_zoom_level = 0.1
+        self.current_zoom_level = 0.1
+        self.min_zoom = 0.01
         self.max_zoom = 1.0
 
         # --- position ---
@@ -64,14 +64,14 @@ class Camera:
         self.desired_zoom_level = new_zoom
 
     def adjust_zoom(self):
-        smoothing = 0.15
-        if abs(self.current_zoom_level - self.desired_zoom_level) > 0.001:
+        smoothing = 0.1
+        if self.current_zoom_level != self.desired_zoom_level:
             self.current_zoom_level += (self.desired_zoom_level - self.current_zoom_level) * smoothing
         else:
             self.current_zoom_level = self.desired_zoom_level
 
     def adjust_position(self):
-        smoothing = 0.15
+        smoothing = 0.1
         dx = self.desired_pos[0] - self.current_pos[0]
         dy = self.desired_pos[1] - self.current_pos[1]
 
