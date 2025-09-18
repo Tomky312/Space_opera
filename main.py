@@ -32,7 +32,7 @@ camera = camera.Camera(game, window)
 field01 = field.Field(game)
 game.current_field = field01
 
-ship01 = ship.Ship(field01, [200, 200], resources.image_destroyer)
+ship01 = ship.Ship(field01, [200, 200], resources.image_excavator)
 ship01.sprite.batch = batch
 
 asteroid01 = asteroid.Asteroid(field01, [500, 500], resources.image_asteroid)

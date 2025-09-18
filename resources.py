@@ -34,6 +34,10 @@ image_cruiser = load_centered_image("assets/ships/cruiser.png")
 image_battlecruiser = load_centered_image("assets/ships/battlecruiser.png")
 image_battleship = load_centered_image("assets/ships/battleship.png")
 
+image_prospector = load_centered_image("assets/ships/prospector.png")
+image_excavator = load_centered_image("assets/ships/excavator.png")
+image_harvester = load_centered_image("assets/ships/harvester.png")
+
 image_asteroid = load_centered_image("assets/asteroids/asteroid.png")
 
 
