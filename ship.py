@@ -10,11 +10,13 @@ class Ship:
         # ---
         self.sprite = pyglet.sprite.Sprite(image)
         self.selection_circle_sprite = pyglet.sprite.Sprite(resources.image_selection_circle)
+        self.line = pyglet.shapes.Line(0, 0, 1, 1, color=(76, 255, 0))
+        self.line.batch = None
 
         self.world_pos = world_pos
 
-        self.max_speed = 10
-        self.acceleration = 0.1
+        self.max_speed = 100
+        self.acceleration = 0.16  # m/s per tick -> m/s/s is 60 * less
         self.velocity = [0, 0]
 
         self.world_dest = [world_pos[0], world_pos[1]]
@@ -29,6 +31,8 @@ class Ship:
         self.move()
         # self.rotate()
         self.maneuver(TICK)
+
+        print(my_math.distance(self.maneuver_target.world_pos, self.world_pos))
 
     def move(self):
 
@@ -122,7 +126,7 @@ class Ship:
 
             # Pull slightly back toward center for spiral effect
             dir_to_center = my_math.direction(orbit_point, self.maneuver_target.world_pos)
-            inward_pull = my_math.scale(dir_to_center, orbit_radius / 3)
+            inward_pull = my_math.scale(dir_to_center, orbit_radius / 10  )
             orbit_point[0] += inward_pull[0]
             orbit_point[1] += inward_pull[1]
 

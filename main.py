@@ -41,7 +41,7 @@ asteroid01.sprite.batch = batch
 # camera.tracking_obj = ship01
 
 ship01.maneuver_target = asteroid01
-ship01.maneuver_dist = 6000
+ship01.maneuver_dist = 25000
 ship01.maneuver_type = "orbit"
 
 ### --------- MENUS ------------
