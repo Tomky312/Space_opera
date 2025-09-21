@@ -13,6 +13,7 @@ class Ship:
         self.line = pyglet.shapes.Line(0, 0, 1, 1, color=(76, 255, 0))
         self.line.batch = None
         self.orbit_circle = pyglet.shapes.Circle(0, 0, 100, color=(76, 255, 0))
+        self.orbit_circle.opacity = 30
         self.orbit_circle.batch = None
 
         self.world_pos = world_pos
@@ -37,20 +38,19 @@ class Ship:
         # self.rotate()
         self.maneuver(TICK)
 
-    def move(self):
+        print(my_math.size(self.velocity))
 
-        self.velocity[0] *= 1 - self.acceleration / self.max_speed
-        self.velocity[1] *= 1 - self.acceleration / self.max_speed
+    def move(self):
 
         self.world_pos[0] += self.velocity[0]
         self.world_pos[1] += self.velocity[1]
 
+        if my_math.size(self.velocity) < 0.1 and my_math.distance(self.world_pos, self.world_dest) < 1:
+            self.world_pos[0] = self.world_dest[0]
+            self.world_pos[1] = self.world_dest[1]
+
         if self.world_dest[0] == self.world_pos[0] and self.world_dest[1] == self.world_pos[1]:
             return
-
-        if my_math.distance(self.world_pos, self.world_dest) < 10:
-            self.world_dest[0] = self.world_pos[0]
-            self.world_dest[1] = self.world_pos[1]
 
         breaking_time = (my_math.size(self.velocity) / self.acceleration) * 1.05 # coefficient to slightly extend breakpoint
         brake_point = [0, 0]
@@ -60,8 +60,12 @@ class Ship:
         if my_math.distance(self.world_pos, self.world_dest) < 1:
             self.world_dest[0] = self.world_pos[0]
             self.world_dest[1] = self.world_pos[1]
+            self.velocity[0] *= 0.99
+            self.velocity[1] *= 0.99
             return
         elif my_math.size(self.velocity) > self.max_speed:
+            self.velocity[0] *= 0.99
+            self.velocity[1] *= 0.99
             return
         else:
             dir = my_math.direction(brake_point, self.world_dest)
@@ -188,9 +192,15 @@ class Ship:
         self.orbit_circle.radius = radius
 
     def set_waypoint(self, x, y):
-        self.maneuver_type = "orbit"
-        self.maneuver_target = self.waypoint_start_world_pos
+
         self.maneuver_dist = my_math.distance(self.waypoint_start_world_pos, self.waypoint_end_world_pos)
+        if self.maneuver_dist >= 1000:
+            self.maneuver_type = "orbit"
+            self.maneuver_target = [self.waypoint_start_world_pos[0], self.waypoint_start_world_pos[1]]
+        else:
+            self.maneuver_type = "none"
+            self.world_dest = [self.waypoint_start_world_pos[0], self.waypoint_start_world_pos[1]]
+
 
 
 
