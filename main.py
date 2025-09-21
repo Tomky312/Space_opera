@@ -16,6 +16,7 @@ import asteroid
 window = pyglet.window.Window(resizable= True, width=2000, height=1000, caption="Basic Pyglet Game Loop")
 keys = key.KeyStateHandler()
 mouse_state = {"left": False, "right": False, "middle": False}
+mouse_pos = {"x": 0, "y": 0}
 
 batch = pyglet.graphics.Batch()
 
@@ -39,14 +40,8 @@ game.current_field = field01
 ship01 = ship.Ship(field01, [200, 200], resources.image_battleship)
 ship01.sprite.batch = batch
 
-asteroid01 = asteroid.Asteroid(field01, [500, 500], resources.image_asteroid)
-asteroid01.sprite.batch = batch
-
 # camera.tracking_obj = ship01
 
-ship01.maneuver_target = asteroid01
-ship01.maneuver_dist = 15000
-ship01.maneuver_type = "orbit"
 
 ### --------- MENUS ------------
 
@@ -58,7 +53,11 @@ def update(dt):
     if TICK > tick_max:
         TICK = 0
 
-    game.update(TICK, batch)
+    mouse_pos["x"] = window._mouse_x
+    mouse_pos["y"] = window._mouse_y
+    game.update(TICK, batch, mouse_state, mouse_pos["x"], mouse_pos["y"])
+
+
 
 @window.event
 def on_draw():
@@ -78,13 +77,16 @@ def on_key_release(symbol, modifiers):
 def on_mouse_press(x, y, button, modifiers):
     if button == mouse.LEFT:
         mouse_state["left"] = True
+
+        game.selected = []
+
+        for ship in game.current_field.ships:
+            ship.select(x, y, game.camera)
     elif button == mouse.RIGHT:
         mouse_state["right"] = True
 
-    for ship in game.current_field.ships:
-        ship.select(x, y, game.camera)
-
-    game.selected = []
+        for ship in game.selected:
+            ship.start_waypoint(x, y)
 
 
 @window.event
@@ -94,10 +96,12 @@ def on_mouse_release(x, y, button, modifiers):
     elif button == mouse.RIGHT:
         mouse_state["right"] = False
 
+        for ship in game.selected:
+            ship.set_waypoint(x, y)
+
 @window.event
 def on_mouse_scroll(x, y, scroll_x, scroll_y):
     game.camera.set_zoom(scroll_y, x, y)
-
 
 # Schedule the update function to be called regularly
 pyglet.clock.schedule_interval(update, 1/60.0)  # 60 FPS

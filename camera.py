@@ -1,4 +1,5 @@
 import pyglet
+import my_math
 
 class Camera:
     def __init__(self, game, window):
@@ -109,9 +110,18 @@ class Camera:
                 line_end = self.world_to_screen(ship.world_dest)
                 ship.line = pyglet.shapes.Line(line_start[0], line_start[1], line_end[0], line_end[1], color=(76, 255, 0))
                 ship.line.batch = batch
+
+                screen_circle_pos = self.world_to_screen(ship.waypoint_start_world_pos)
+                ship.orbit_circle.x = screen_circle_pos[0]
+                ship.orbit_circle.y = screen_circle_pos[1]
+                radius = my_math.distance(ship.waypoint_start_world_pos,
+                                          ship.waypoint_end_world_pos) * self.current_zoom_level
+                ship.orbit_circle.radius = radius
+                ship.orbit_circle.batch = batch
             else:
                 ship.selection_circle_sprite.batch = None
                 ship.line.batch = None
+                ship.orbit_circle.batch = None
 
         for asteroid in self.game.current_field.asteroids:
             screen_pos = self.world_to_screen(asteroid.world_pos)

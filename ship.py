@@ -12,6 +12,8 @@ class Ship:
         self.selection_circle_sprite = pyglet.sprite.Sprite(resources.image_selection_circle)
         self.line = pyglet.shapes.Line(0, 0, 1, 1, color=(76, 255, 0))
         self.line.batch = None
+        self.orbit_circle = pyglet.shapes.Circle(0, 0, 100, color=(76, 255, 0))
+        self.orbit_circle.batch = None
 
         self.world_pos = world_pos
 
@@ -22,7 +24,7 @@ class Ship:
         self.world_dest = [world_pos[0], world_pos[1]]
 
         self.maneuver_type = "none"
-        self.maneuver_target = None
+        self.maneuver_target = [0, 0]
         self.maneuver_dist = 10
 
         self.selected = False
@@ -113,12 +115,12 @@ class Ship:
             orbit_radius = self.maneuver_dist
 
             # Get direction from target to current position
-            dir_to_self = my_math.direction(self.maneuver_target.world_pos, self.world_pos)
+            dir_to_self = my_math.direction(self.maneuver_target, self.world_pos)
 
             # Start with a point at orbit distance from target
             orbit_point = my_math.scale(dir_to_self, orbit_radius)
-            orbit_point[0] += self.maneuver_target.world_pos[0]
-            orbit_point[1] += self.maneuver_target.world_pos[1]
+            orbit_point[0] += self.maneuver_target[0]
+            orbit_point[1] += self.maneuver_target[1]
 
             # Move perpendicular to create orbital offset
             perpendicular = my_math.normal(dir_to_self)
@@ -126,7 +128,7 @@ class Ship:
             orbit_point[1] += perpendicular[1] * orbit_radius
 
             # Pull slightly back toward center for spiral effect
-            dir_to_center = my_math.direction(orbit_point, self.maneuver_target.world_pos)
+            dir_to_center = my_math.direction(orbit_point, self.maneuver_target)
             inward_pull = my_math.scale(dir_to_center, orbit_radius / 10  )
             orbit_point[0] += inward_pull[0]
             orbit_point[1] += inward_pull[1]
@@ -171,14 +173,24 @@ class Ship:
         else:
             self.selected = False
 
-    def start_waypoint(self):
-        pass
+    def start_waypoint(self, x, y):
+        self.waypoint_start_world_pos = self.field.game.camera.screen_to_world([x, y])
 
-    def update_waypoint(self):
-        pass
+        screen_circle_pos = self.field.game.camera.world_to_screen(self.waypoint_start_world_pos)
+        self.orbit_circle.x = screen_circle_pos[0]
+        self.orbit_circle.y = screen_circle_pos[1]
 
-    def set_waypoint(self):
-        pass
+    def update_waypoint(self, x, y):
+
+        self.waypoint_end_world_pos = self.field.game.camera.screen_to_world([x, y])
+
+        radius = my_math.distance(self.waypoint_start_world_pos, self.waypoint_end_world_pos) * self.field.game.camera.current_zoom_level
+        self.orbit_circle.radius = radius
+
+    def set_waypoint(self, x, y):
+        self.maneuver_type = "orbit"
+        self.maneuver_target = self.waypoint_start_world_pos
+        self.maneuver_dist = my_math.distance(self.waypoint_start_world_pos, self.waypoint_end_world_pos)
 
 
 
