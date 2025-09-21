@@ -27,12 +27,13 @@ class Ship:
 
         self.selected = False
 
+        self.waypoint_start_world_pos = [0,0]
+        self.waypoint_end_world_pos = [0,0]
+
     def update(self, TICK):
         self.move()
         # self.rotate()
         self.maneuver(TICK)
-
-        print(my_math.distance(self.maneuver_target.world_pos, self.world_pos))
 
     def move(self):
 
@@ -166,8 +167,18 @@ class Ship:
 
         if distance_squared <= radius * radius:
             self.selected = True
+            self.field.game.selected.append(self)
         else:
             self.selected = False
+
+    def start_waypoint(self):
+        pass
+
+    def update_waypoint(self):
+        pass
+
+    def set_waypoint(self):
+        pass
 
 
 

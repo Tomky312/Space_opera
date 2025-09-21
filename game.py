@@ -7,6 +7,8 @@ class Game:
         self.current_field = None
         self.menus = []
 
+        self.selected = []
+
     def update(self, TICK, batch):
         self.camera.update(TICK, batch)
 

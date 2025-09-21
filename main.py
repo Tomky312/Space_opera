@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import pyglet
-from pyglet.gl import *
+from pyglet.gl import glClearColor
+from pyglet.window import key
+from pyglet.window import mouse
 
 import resources
 import ship
@@ -11,7 +13,9 @@ from game import Game
 import asteroid
 
 # Create a window
-window = pyglet.window.Window(resizable = True, width=1600, height=800, caption="Basic Pyglet Game Loop")
+window = pyglet.window.Window(resizable= True, width=2000, height=1000, caption="Basic Pyglet Game Loop")
+keys = key.KeyStateHandler()
+mouse_state = {"left": False, "right": False, "middle": False}
 
 batch = pyglet.graphics.Batch()
 
@@ -32,7 +36,7 @@ camera = camera.Camera(game, window)
 field01 = field.Field(game)
 game.current_field = field01
 
-ship01 = ship.Ship(field01, [200, 200], resources.image_excavator)
+ship01 = ship.Ship(field01, [200, 200], resources.image_battleship)
 ship01.sprite.batch = batch
 
 asteroid01 = asteroid.Asteroid(field01, [500, 500], resources.image_asteroid)
@@ -41,7 +45,7 @@ asteroid01.sprite.batch = batch
 # camera.tracking_obj = ship01
 
 ship01.maneuver_target = asteroid01
-ship01.maneuver_dist = 25000
+ship01.maneuver_dist = 15000
 ship01.maneuver_type = "orbit"
 
 ### --------- MENUS ------------
@@ -72,8 +76,23 @@ def on_key_release(symbol, modifiers):
 
 @window.event
 def on_mouse_press(x, y, button, modifiers):
+    if button == mouse.LEFT:
+        mouse_state["left"] = True
+    elif button == mouse.RIGHT:
+        mouse_state["right"] = True
+
     for ship in game.current_field.ships:
         ship.select(x, y, game.camera)
+
+    game.selected = []
+
+
+@window.event
+def on_mouse_release(x, y, button, modifiers):
+    if button == mouse.LEFT:
+        mouse_state["left"] = False
+    elif button == mouse.RIGHT:
+        mouse_state["right"] = False
 
 @window.event
 def on_mouse_scroll(x, y, scroll_x, scroll_y):
