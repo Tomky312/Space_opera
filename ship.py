@@ -1,6 +1,8 @@
 import pyglet
 import my_math
 import resources
+from my_math import distance
+
 
 class Ship:
     def __init__(self, field, world_pos, image):
@@ -53,7 +55,7 @@ class Ship:
         if self.world_dest[0] == self.world_pos[0] and self.world_dest[1] == self.world_pos[1]:
             return
 
-        breaking_time = (my_math.size(self.velocity) / self.acceleration) * 1.05 # coefficient to slightly extend breakpoint
+        breaking_time = (my_math.size(self.velocity) / self.acceleration) # coefficient to adjust brakepoint for orbit
         brake_point = [0, 0]
         brake_point[0] = self.world_pos[0] + self.velocity[0] * breaking_time
         brake_point[1] = self.world_pos[1] + self.velocity[1] * breaking_time
@@ -144,8 +146,6 @@ class Ship:
             # Set as destination
             self.world_dest[0] = orbit_point[0]
             self.world_dest[1] = orbit_point[1]
-
-
 
         elif self.maneuver_type[0] == "keep_at_range":
             desired_range = self.maneuver_dist

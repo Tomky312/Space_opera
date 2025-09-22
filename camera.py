@@ -107,18 +107,19 @@ class Camera:
             if ship.selected:
                 ship.selection_circle_sprite.batch = batch
 
-                #line_start = self.world_to_screen(ship.world_pos)
-                #line_end = self.world_to_screen(ship.world_dest)
-                #ship.line = pyglet.shapes.Line(line_start[0], line_start[1], line_end[0], line_end[1], color=(76, 255, 0))
-                #ship.line.batch = batch
-
                 if ship.maneuver_type == "none" and my_math.distance(ship.world_pos, ship.world_dest) > 10:
                     waypoint_circle_pos = self.world_to_screen(ship.world_dest)
                     ship.waypoint_circle_sprite.x = waypoint_circle_pos[0]
                     ship.waypoint_circle_sprite.y = waypoint_circle_pos[1]
                     ship.waypoint_circle_sprite.batch = batch
+
+                    line_start = self.world_to_screen(ship.world_pos)
+                    line_end = self.world_to_screen(ship.world_dest)
+                    ship.line = pyglet.shapes.Line(line_start[0], line_start[1], line_end[0], line_end[1], color=(76, 255, 0))
+                    ship.line.batch = batch
                 else:
                     ship.waypoint_circle_sprite.batch = None
+                    ship.line.batch = None
 
                 if ship.maneuver_target:
                     screen_circle_pos = self.world_to_screen(ship.maneuver_target.world_pos)
