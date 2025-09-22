@@ -45,6 +45,9 @@ ship02.max_speed *= 10
 ship02.acceleration *= 10
 ship02.sprite.batch = batch
 
+asteroid01 = asteroid.Asteroid(field01, [2000, 3000], resources.image_asteroid)
+asteroid01.sprite.batch = batch
+
 # camera.tracking_obj = ship01
 
 
