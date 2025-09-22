@@ -37,8 +37,11 @@ camera = camera.Camera(game, window)
 field01 = field.Field(game)
 game.current_field = field01
 
-ship01 = ship.Ship(field01, [200, 200], resources.image_battleship)
+ship01 = ship.Ship(field01, [0, 0], resources.image_battleship)
 ship01.sprite.batch = batch
+
+ship02 = ship.Ship(field01, [5000, 5000], resources.image_battleship)
+ship02.sprite.batch = batch
 
 # camera.tracking_obj = ship01
 

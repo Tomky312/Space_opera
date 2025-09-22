@@ -41,6 +41,7 @@ image_harvester = load_centered_image("assets/ships/harvester.png")
 image_asteroid = load_centered_image("assets/asteroids/asteroid.png")
 
 image_selection_circle = load_centered_image("assets/UI/selection_circle.png")
+image_waypoint_circle = load_centered_image("assets/UI/waypoint_circle.png")
 
 
 image_background = load_centered_image("assets/background/01.jpg")

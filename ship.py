@@ -10,6 +10,7 @@ class Ship:
         # ---
         self.sprite = pyglet.sprite.Sprite(image)
         self.selection_circle_sprite = pyglet.sprite.Sprite(resources.image_selection_circle)
+        self.waypoint_circle_sprite = pyglet.sprite.Sprite(resources.image_waypoint_circle)
         self.line = pyglet.shapes.Line(0, 0, 1, 1, color=(76, 255, 0))
         self.line.batch = None
         self.orbit_circle = pyglet.shapes.Circle(0, 0, 100, color=(76, 255, 0))
@@ -25,7 +26,9 @@ class Ship:
         self.world_dest = [world_pos[0], world_pos[1]]
 
         self.maneuver_type = "none"
-        self.maneuver_target = [0, 0]
+        self.maneuver_coor = [0, 0]
+        self.maneuver_target: Ship
+        self.maneuver_target = None
         self.maneuver_dist = 10
 
         self.selected = False
@@ -37,8 +40,6 @@ class Ship:
         self.move()
         # self.rotate()
         self.maneuver(TICK)
-
-        print(my_math.size(self.velocity))
 
     def move(self):
 
@@ -112,6 +113,9 @@ class Ship:
             pass
         else:
             return
+        if self.maneuver_target:
+            self.maneuver_coor[0] = self.maneuver_target.world_pos[0]
+            self.maneuver_coor[1] = self.maneuver_target.world_pos[1]
         if self.maneuver_type == "none":
             return
 
@@ -119,12 +123,12 @@ class Ship:
             orbit_radius = self.maneuver_dist
 
             # Get direction from target to current position
-            dir_to_self = my_math.direction(self.maneuver_target, self.world_pos)
+            dir_to_self = my_math.direction(self.maneuver_coor, self.world_pos)
 
             # Start with a point at orbit distance from target
             orbit_point = my_math.scale(dir_to_self, orbit_radius)
-            orbit_point[0] += self.maneuver_target[0]
-            orbit_point[1] += self.maneuver_target[1]
+            orbit_point[0] += self.maneuver_coor[0]
+            orbit_point[1] += self.maneuver_coor[1]
 
             # Move perpendicular to create orbital offset
             perpendicular = my_math.normal(dir_to_self)
@@ -132,7 +136,7 @@ class Ship:
             orbit_point[1] += perpendicular[1] * orbit_radius
 
             # Pull slightly back toward center for spiral effect
-            dir_to_center = my_math.direction(orbit_point, self.maneuver_target)
+            dir_to_center = my_math.direction(orbit_point, self.maneuver_coor)
             inward_pull = my_math.scale(dir_to_center, orbit_radius / 10  )
             orbit_point[0] += inward_pull[0]
             orbit_point[1] += inward_pull[1]
@@ -147,12 +151,12 @@ class Ship:
             desired_range = self.maneuver_dist
 
             # Get direction from target to current position
-            dir_to_self = my_math.direction(self.maneuver_target, self.world_pos)
+            dir_to_self = my_math.direction(self.maneuver_coor, self.world_pos)
 
             # Calculate position at desired range from target
             range_position = my_math.scale(dir_to_self, desired_range)
-            range_position[0] += self.maneuver_target[0]
-            range_position[1] += self.maneuver_target[1]
+            range_position[0] += self.maneuver_coor[0]
+            range_position[1] += self.maneuver_coor[1]
 
             # Set as destination
             self.world_dest[0] = range_position[0]
@@ -180,9 +184,13 @@ class Ship:
     def start_waypoint(self, x, y):
         self.waypoint_start_world_pos = self.field.game.camera.screen_to_world([x, y])
 
-        screen_circle_pos = self.field.game.camera.world_to_screen(self.waypoint_start_world_pos)
-        self.orbit_circle.x = screen_circle_pos[0]
-        self.orbit_circle.y = screen_circle_pos[1]
+        for ship in self.field.ships:
+            if ship == self:
+                continue
+            if my_math.distance(self.waypoint_start_world_pos, ship.world_pos) <= 1000:
+                self.maneuver_target = ship
+            else:
+                self.maneuver_target = None
 
     def update_waypoint(self, x, y):
 
@@ -196,7 +204,7 @@ class Ship:
         self.maneuver_dist = my_math.distance(self.waypoint_start_world_pos, self.waypoint_end_world_pos)
         if self.maneuver_dist >= 1000:
             self.maneuver_type = "orbit"
-            self.maneuver_target = [self.waypoint_start_world_pos[0], self.waypoint_start_world_pos[1]]
+            self.maneuver_coor = [self.waypoint_start_world_pos[0], self.waypoint_start_world_pos[1]]
         else:
             self.maneuver_type = "none"
             self.world_dest = [self.waypoint_start_world_pos[0], self.waypoint_start_world_pos[1]]
