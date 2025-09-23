@@ -38,7 +38,9 @@ image_prospector = load_centered_image("assets/ships/prospector.png")
 image_excavator = load_centered_image("assets/ships/excavator.png")
 image_harvester = load_centered_image("assets/ships/harvester.png")
 
-image_asteroid = load_centered_image("assets/asteroids/asteroid.png")
+image_asteroid_small = load_centered_image("assets/asteroids/asteroid_small.png")
+image_asteroid_medium = load_centered_image("assets/asteroids/asteroid_medium.png")
+image_asteroid_large = load_centered_image("assets/asteroids/asteroid_large.png")
 
 image_selection_circle = load_centered_image("assets/UI/selection_circle.png")
 image_waypoint_circle = load_centered_image("assets/UI/waypoint_circle.png")
