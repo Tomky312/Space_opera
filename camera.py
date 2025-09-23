@@ -107,7 +107,7 @@ class Camera:
             if ship.selected:
                 ship.selection_circle_sprite.batch = batch
 
-                if ship.maneuver_type == "none" and my_math.distance(ship.world_pos, ship.world_dest) > 10 or True: # temporary visible
+                if ship.maneuver_type == "none" and my_math.distance(ship.world_pos, ship.world_dest) > 10:
                     waypoint_circle_pos = self.world_to_screen(ship.world_dest)
                     ship.waypoint_circle_sprite.x = waypoint_circle_pos[0]
                     ship.waypoint_circle_sprite.y = waypoint_circle_pos[1]

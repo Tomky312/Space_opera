@@ -15,8 +15,7 @@ class Ship:
         self.waypoint_circle_sprite = pyglet.sprite.Sprite(resources.image_waypoint_circle)
         self.line = pyglet.shapes.Line(0, 0, 1, 1, color=(76, 255, 0))
         self.line.batch = None
-        self.orbit_circle = pyglet.shapes.Circle(0, 0, 100, color=(76, 255, 0))
-        self.orbit_circle.opacity = 30
+        self.orbit_circle = pyglet.shapes.Arc(0, 0, 100, color=(76, 255, 0), thickness= 1)
         self.orbit_circle.batch = None
 
         self.world_pos = world_pos
@@ -111,7 +110,7 @@ class Ship:
             self.sprite.rotation -= rotation_speed
 
     def maneuver(self, TICK):
-        if TICK == 0 or TICK == 20 or TICK == 40:
+        if TICK == 15 or TICK == 30 or TICK == 45 or TICK == 0:
             pass
         else:
             return

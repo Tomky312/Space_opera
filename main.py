@@ -21,11 +21,11 @@ mouse_pos = {"x": 0, "y": 0}
 batch = pyglet.graphics.Batch()
 
 # background sprite
-background_sprite = pyglet.sprite.Sprite(resources.image_background)
-background_sprite.batch = batch
+#background_sprite = pyglet.sprite.Sprite(resources.image_background)
+#background_sprite.batch = batch
 
 #   set colour after clear call
-glClearColor(50/255.0, 70/255.0, 150/255.0, 1.0)
+glClearColor(40/255.0, 55/255.0, 120/255.0, 1.0)
 
 # tick timer for delayed actions
 TICK = 0
