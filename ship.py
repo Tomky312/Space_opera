@@ -20,8 +20,8 @@ class Ship:
 
         self.world_pos = world_pos
 
-        self.max_speed = 100
-        self.acceleration = 0.16  # m/s per tick -> m/s/s is 60 * less
+        self.max_speed = 1.66    # m per tick -> m/s is 60 * less
+        self.acceleration = 0.0027  # m/s per tick -> m/s/s is 3600 * less
         self.velocity = [0, 0]
 
         self.world_dest = [world_pos[0], world_pos[1]]
@@ -41,6 +41,9 @@ class Ship:
         self.move()
         # self.rotate()
         self.maneuver(TICK)
+
+        if self.selected:
+            print(my_math.size(self.velocity) * 60)
 
     def move(self):
 
@@ -133,14 +136,14 @@ class Ship:
 
             # Move perpendicular to create orbital offset
             perpendicular = my_math.normal(dir_to_self)
-            orbit_point[0] += perpendicular[0] * orbit_radius
-            orbit_point[1] += perpendicular[1] * orbit_radius
+            orbit_point[0] += perpendicular[0] * orbit_radius/2
+            orbit_point[1] += perpendicular[1] * orbit_radius/2
 
             # Pull slightly back toward center for spiral effect
-            dir_to_center = my_math.direction(orbit_point, self.maneuver_coor)
-            inward_pull = my_math.scale(dir_to_center, orbit_radius / 10  )
-            orbit_point[0] += inward_pull[0]
-            orbit_point[1] += inward_pull[1]
+            #dir_to_center = my_math.direction(orbit_point, self.maneuver_coor)
+            #inward_pull = my_math.scale(dir_to_center, orbit_radius / 3  )
+            #orbit_point[0] += inward_pull[0]
+            #orbit_point[1] += inward_pull[1]
 
             # Set as destination
             self.world_dest[0] = orbit_point[0]
@@ -186,7 +189,7 @@ class Ship:
         for ship in self.field.ships:
             if ship == self:
                 continue
-            if my_math.distance(self.waypoint_start_world_pos, ship.world_pos) <= 1000:
+            if my_math.distance(self.waypoint_start_world_pos, ship.world_pos) <= 250  :
                 self.maneuver_target = ship
             else:
                 self.maneuver_target = None

@@ -9,7 +9,7 @@ class Field:
 
         self.stations = []
         self.ships = []
-        self.asteroids = []
+        self.asteroid_clusters = []
 
     def update(self, TICK):
         for station in self.stations:
@@ -18,5 +18,5 @@ class Field:
         for ship in self.ships:
             ship.update(TICK)
 
-        for asteroid in self.asteroids:
-            asteroid.update(TICK)
+        for asteroid_cluster in self.asteroid_clusters:
+            asteroid_cluster.update(TICK)

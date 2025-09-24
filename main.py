@@ -5,6 +5,7 @@ from pyglet.gl import glClearColor
 from pyglet.window import key
 from pyglet.window import mouse
 
+import asteroid_cluster
 import resources
 import ship
 import camera
@@ -44,6 +45,10 @@ ship02 = ship.Ship(field01, [5000, 5000], resources.image_frigate)
 ship02.max_speed *= 10
 ship02.acceleration *= 10
 ship02.sprite.batch = batch
+
+astcluster01 = asteroid_cluster.AsteroidCluster(field01, 20, 10000)
+for asteroid in astcluster01.asteroids:
+    asteroid.sprite.batch = batch
 
 # camera.tracking_obj = ship01
 
