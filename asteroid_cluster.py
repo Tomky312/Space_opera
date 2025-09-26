@@ -11,6 +11,7 @@ class AsteroidCluster:
 
         self.positions = []
         self.masses = []
+        self.type = self.get_random_type()
 
         self.asteroids = []
 
@@ -53,3 +54,11 @@ class AsteroidCluster:
         for i in range(count):
             self.masses[i] = self.masses[i] * self.masses[i]
             print(self.masses[i])
+
+    def get_random_type(self):
+        type_list = ["C-Type", "C-Type",
+                     "S-Type", "S-Type", "S-Type", "S-Type", "S-Type",
+                     "M-Type", "M-Type",
+                     "R-Type",
+                     "I-Type"]
+        return type_list[random.randint(0, len(type_list))]
